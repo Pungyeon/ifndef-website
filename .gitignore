@@ -1,0 +1,9 @@
+bin/
+pkg/
+src/
+
+bin/*
+pkg/*
+src/*
+
+main.zip
