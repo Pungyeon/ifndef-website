@@ -8,6 +8,5 @@ src/*
 
 terraform/.terraform/plugins/
 terraform/*.tfvars
-terraform/*vars*
 
 main.zip
