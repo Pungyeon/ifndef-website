@@ -66,6 +66,35 @@ resource "aws_api_gateway_deployment" "hello_api_deployment" {
   description = "Deploy methods: ${module.hello_get.http_method} ${module.hello_post.http_method}"
 }
 
+# DYNAMO DB SECTION
+resource "aws_dynamodb_table" "basic-dynamodb-table" {
+  name           = "IFNDEF_ARTICLES"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "ArticleId"
+  range_key      = "ArticleDate"
+
+  attribute {
+    name = "ArticleId"
+    type = "N"
+  }
+
+  attribute {
+    name = "ArticleDate"
+    type = "S"
+  }
+
+  ttl {
+    attribute_name = "TimeToExist"
+    enabled = false
+  }
+
+  tags {
+    Name        = "ifndef-website"
+    Environment = "production"
+  }
+}
+
 output "dev_url" {
   value = "https://${aws_api_gateway_deployment.hello_api_deployment.rest_api_id}.execute-api.${var.region}.amazonaws.com/${aws_api_gateway_deployment.hello_api_deployment.stage_name}/${aws_api_gateway_resource.hello_api_res_hello.path_part}"
 }
