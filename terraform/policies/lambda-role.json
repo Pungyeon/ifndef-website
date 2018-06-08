@@ -6,7 +6,8 @@
       "Principal": {
         "Service": [
           "lambda.amazonaws.com",
-          "apigateway.amazonaws.com"
+          "apigateway.amazonaws.com",
+          "dynamodb.amazonaws.com"
         ]
       },
       "Effect": "Allow",
