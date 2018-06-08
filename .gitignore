@@ -6,7 +6,7 @@ bin/*
 pkg/*
 src/*
 
-.terraform/plugins/
+terraform/.terraform/plugins/
 terraform/*.tfvars
 terraform/*vars*
 
