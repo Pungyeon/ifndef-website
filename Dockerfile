@@ -1,4 +1,4 @@
 FROM golang:alpine
 WORKDIR /src/app    
-COPY main main
+COPY bin/main main
 ENTRYPOINT ["/src/app/main"]

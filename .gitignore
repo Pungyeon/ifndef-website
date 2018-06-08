@@ -6,4 +6,8 @@ bin/*
 pkg/*
 src/*
 
+.terraform/plugins/
+terraform/*.tfvars
+terraform/*vars*
+
 main.zip
