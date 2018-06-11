@@ -34,8 +34,10 @@ exports.icrement_views = function(event, context, callback) {
       "S": event.ArticleDate
     }
   },
-  UpdateExpression: "set Replies = Replies + :num",
-  ExpressionAttributeValues: { ":num": { "N": "1"} },
+  UpdateExpression: "set ViewCount = ViewCount + :num",
+  ExpressionAttributeValues: {
+    ":num": { "N": "1"}
+  },
   ReturnValues: "ALL_NEW"
 }
 
