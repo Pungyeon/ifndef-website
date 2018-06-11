@@ -18,10 +18,10 @@ module "lambda" {
   role = "${aws_iam_role.iam_role_for_lambda.arn}"
 }
 
-module "lambda_post" {
+module "lambda_increment" {
   source = "./lambda"
   name = "index"
-  handler = "post_handler"
+  handler = "icrement_views"
   runtime = "nodejs4.3"
   role = "${aws_iam_role.iam_role_for_lambda.arn}"
 }
