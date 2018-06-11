@@ -2,16 +2,15 @@ var AWS = require('aws-sdk');
 
 AWS.config.update({region: 'us-east-1'});
 
-var db = new AWS.DynamoDB.DocumentClient();
-
-var params = {
-  TableName: "IFNDEF_ARTICLES"
-}
-
 exports.handler = function(event, context, callback) {
+  var db = new AWS.DynamoDB.DocumentClient();
+
+  var params = {
+    TableName: "IFNDEF_ARTICLES"
+  }
     
   db.scan(params, function(err, data) {
-    if (err) callback(null, { statusCode: '500', body: err });
+    if (err) return callback(null, { statusCode: '500', body: err });
     
     callback(null, {
       statusCode: '200',
@@ -23,11 +22,13 @@ exports.handler = function(event, context, callback) {
   });     
 };
 
-var incrementParams = {
+exports.icrement_views = function(event, context, callback) {
+  var db = new AWS.DynamoDB();
+  var incrementParams = {
   TableName: "IFNDEF_ARTICLES",
   Key: {
     "ArticleId": { 
-      "N": event.ArticleId
+      "N": event.ArticleId.toString()
     },
     "ArticleDate": {
       "S": event.ArticleDate
@@ -38,9 +39,8 @@ var incrementParams = {
   ReturnValues: "ALL_NEW"
 }
 
-exports.icrement_views = function(event, context, callback) {
-  db.UpdateItem(params, function(err, data) {
-    if (err) callback(null, { statusCode: '500', body: err });
+  db.updateItem(incrementParams, function(err, data) {
+    if (err) return callback(null, { statusCode: '500', body: err });
     
     callback(null, {
       statusCode: '200',
